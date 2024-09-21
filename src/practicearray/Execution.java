@@ -29,8 +29,8 @@ public class Execution {
             System.out.print("Price per Unit: ");
             double price = sc.nextDouble();
             
-            implement[max] = new Implementation();
-            implement[max].addProducts(id, name, category, quantity, price, implement[max].criteria(quantity, price));
+            implement[id-1] = new Implementation();
+            implement[id-1].addProducts(id, name, category, quantity, price, implement[id-1].criteria(quantity, price));
             max+=1;
         }
     }
@@ -40,7 +40,11 @@ public class Execution {
         System.out.printf("%-5s %-15s %-15s %-15s %-15s %-15s\n", "ID", "Name", "Category", "Stock Quantity", "Price per Unit", "Status");
         
         for(int i = 0; i < max; i++){
-            implement[i].viewProducts();
+            if(implement[i] == null){
+                System.out.println("");
+            } else{
+                implement[i].viewProducts();
+            }
         }
     }
     
@@ -74,8 +78,8 @@ public class Execution {
             if(id == implement[i].id){
                 System.out.println("Selected product: "+implement[i].name);
                 if(implement[i].removeProducts()){
-                    implement[i].addProducts(implement[i+1].id-1, implement[i+1].name, implement[i+1].category, implement[i+1].quantity, implement[i+1].price, implement[i+1].status);
-                    max-=1;
+//                    implement[i].addProducts(implement[i+1].id, implement[i+1].name, implement[i+1].category, implement[i+1].quantity, implement[i+1].price, implement[i+1].status);
+                    implement[i] = null;
                 }
             }        
         }
